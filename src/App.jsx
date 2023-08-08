@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Login, Home } from './pages/indexpages'
+import { Login, Home,Cadastro } from './pages/indexpages'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -10,6 +10,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
+        <Route path='/cadastro' element={<Cadastro />} />
       </Routes>
     </BrowserRouter>
   )

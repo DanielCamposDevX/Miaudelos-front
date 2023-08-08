@@ -3,7 +3,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png'
 
 
-export default function Login() {
+export default function Cadastro() {
 
     const navigate = useNavigate();
 
@@ -17,13 +17,15 @@ export default function Login() {
             <Fade>
                 <CusImg src={Logo} />
                 <Container>
-                    <Search placeholder='email' />
-                    <Search placeholder='senha' />
+                    <Search placeholder='Nome' />
+                    <Search placeholder='CPF' />
+                    <Search placeholder='Email' />
+                    <Search placeholder='Senha' />
+                    <Search placeholder='Confirmar senha' />
+                    <Search placeholder='Telefone' />
+                    <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { handleClick('/') }}>Cadastrar-se</Sbutton>
                 </Container>
-                <Container>
-                    <Sbutton onClick={() => { handleClick('/home') }}>Entrar</Sbutton>
-                    <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { handleClick('/cadastro') }}>Cadastre-se</Sbutton>
-                </Container>
+                    
             </Fade>
         </Page>
     );
@@ -48,7 +50,7 @@ const Page = styled.div`
     align-items:center;
     justify-content:space-around;
     font-family: 'Lexend Deca', sans-serif;
-    background-image: url('https://i.pinimg.com/564x/51/48/9d/51489d4a8d7bd9eefd33d9056a767455.jpg');
+    background-image: url('https://www.everwallpaper.co.uk/cdn/shop/products/cartoon-cat-wall-mural-plain.jpg?v=1640095561');
 `
 
 const CusImg = styled.img`
