@@ -1,33 +1,59 @@
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png'
+import { useState } from 'react';
+import axios from 'axios';
+
 
 
 export default function Cadastro() {
+    
+    
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [cpass, setCpass] = useState('');
+    const [name, setName] = useState('');
+    const [cpf, setCpf] = useState('');
+    const [phone, setPhone] = useState('');
 
     const navigate = useNavigate();
 
-    function handleClick(site) {
-        navigate(site);
+    function handleSubmit(event) {
+        event.preventDefault();
+        if (password !== cpass) {
+            alert('Senhas devem ser iguais');
+            return 0;
+        }
+        const promise = axios.post(`${import.meta.env.VITE_URL}/signup`, {
+            email,
+            password,
+            name,
+            cpf,
+            phone
+        })
+        .then((res)=>{console.log(res)})
+        .catch((res)=> {console.log(res)})
 
     }
 
     return (
-        <Page>
-            <Fade>
-                <CusImg src={Logo} />
-                <Container>
-                    <Search placeholder='Nome' />
-                    <Search placeholder='CPF' />
-                    <Search placeholder='Email' />
-                    <Search placeholder='Senha' />
-                    <Search placeholder='Confirmar senha' />
-                    <Search placeholder='Telefone' />
-                    <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { handleClick('/') }}>Cadastrar-se</Sbutton>
-                </Container>
-                    
-            </Fade>
-        </Page>
+        <form onSubmit={handleSubmit}>
+            <Page>
+                <Fade>
+                    <CusImg src={Logo} />
+                    <Container>
+                        <Search type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Nome' />
+                        <Search type='text' value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder='CPF' />
+                        <Search type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
+                        <Search type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Senha' />
+                        <Search type='password' value={cpass} onChange={(e) => setCpass(e.target.value)} placeholder='Confirmar senha' />
+                        <Search type='tel' value={phone} onChange={(e) => setPhone(e.target.value)} placeholder='Telefone' />
+                        <Sbutton type='submit' style={{ backgroundColor: 'orange' }}>Cadastrar-se</Sbutton>
+                        <Sbutton onClick={() => { navigate('/') }}>Já tenho cadastro</Sbutton>
+                    </Container>
+                </Fade>
+            </Page>
+        </form>
     );
 }
 

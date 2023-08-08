@@ -1,31 +1,44 @@
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png'
+import axios from 'axios'
+import { useState } from 'react';
 
 
 export default function Login() {
 
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
     const navigate = useNavigate();
 
-    function handleClick(site) {
-        navigate(site);
-
-    }
+    function handleSubmit(event) {
+        event.preventDefault();
+        const promise = axios.post(`${import.meta.env.VITE_URL}/login`,{email,password})
+        .then((res)=>{
+            console.log(res)
+        })
+        .catch((error) => {
+            alert(error)
+        })
+ }
 
     return (
-        <Page>
-            <Fade>
-                <CusImg src={Logo} />
-                <Container>
-                    <Search placeholder='email' />
-                    <Search placeholder='senha' />
-                </Container>
-                <Container>
-                    <Sbutton onClick={() => { handleClick('/home') }}>Entrar</Sbutton>
-                    <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { handleClick('/cadastro') }}>Cadastre-se</Sbutton>
-                </Container>
-            </Fade>
-        </Page>
+        <form onSubmit={handleSubmit}>
+            <Page>
+                <Fade>
+                    <CusImg src={Logo} />
+                    <Container>
+                        <Search type='email' placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Search type='password' placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
+                    </Container>
+                    <Container>
+                        <Sbutton type='submit'>Entrar</Sbutton>
+                        <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
+                    </Container>
+                </Fade>
+            </Page>
+        </form>
     );
 }
 
