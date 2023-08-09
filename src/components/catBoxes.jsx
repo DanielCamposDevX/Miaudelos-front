@@ -1,23 +1,38 @@
 import { styled } from "styled-components"
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 export default function CatBoxes(props) {
 
-    const catData = props.catData;
+    const [catData, setCatData] = useState('');
 
-    return (
-        catData.map((cat, index) => (
-            <CatBox key={index}>
-                <CatImage src={cat.imageUrl} />
-                <ContainerCat>
-                    <h1>{cat.name}</h1>
-                    <ContainerCat style={{flexDirection:'column',width:'50%'}}>
-                    <p>{cat.age}</p>
-                    <p>{cat.description}</p>
-                    </ContainerCat>
+        useEffect(() => {
+            const token = localStorage.getItem('token');
+            const config = {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            };
+            const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
+                .then((res) => { setCatdata(res.data) })
+                .catch((err) => { alert(err) });
+        }, [])
+
+
+return (
+    catData.map((cat, index) => (
+        <CatBox key={index}>
+            <CatImage src={cat.image} />
+            <ContainerCat>
+                <h1>{cat.name}</h1>
+                <ContainerCat style={{ flexDirection: 'column', width: '50%' }}>
+                    <p>{cat.color}</p>
+                    <p>{cat.breed}</p>
                 </ContainerCat>
-            </CatBox>
-        ))
-    )
+            </ContainerCat>
+        </CatBox>
+    ))
+)
 }
 
 
@@ -57,7 +72,6 @@ const CatImage = styled.img`
     height: 100%;
     position: absolute;
 `
-
 const ContainerCat = styled.div`
     flex-direction: flex;
     display:flex;
