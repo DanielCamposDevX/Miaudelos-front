@@ -8,23 +8,22 @@ export default function CatBoxes(props) {
         catData.map((cat, index) => (
             <CatBox key={index}>
                 <CatImage src={cat.imageUrl} />
-                <Container>
+                <ContainerCat>
                     <h1>{cat.name}</h1>
+                    <ContainerCat style={{flexDirection:'column',width:'50%'}}>
                     <p>{cat.age}</p>
                     <p>{cat.description}</p>
-                </Container>
+                    </ContainerCat>
+                </ContainerCat>
             </CatBox>
         ))
     )
 }
 
+
+
 const CatBox = styled.div`
-    background: rgb(253, 253, 253);
-    background: linear-gradient(0deg, rgba(255, 255, 255, 0.132) 0%, rgba(255, 255, 255, 0.132) 100%),
-                url(${props => props.imageUrl}); /* Use the imageUrl prop to set the background image */
-    background-size: cover;
-    background-position: center;
-    z-index: 100;
+    z-index: 10;
     display: flex;
     align-items: flex-end;
     position: relative;
@@ -59,10 +58,13 @@ const CatImage = styled.img`
     position: absolute;
 `
 
-const Container = styled.div`
-    flex-direction: column;
+const ContainerCat = styled.div`
+    flex-direction: flex;
     display:flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
+    background-color: #77006d56;
+    z-index:10;
+    height: 30%;
 `
