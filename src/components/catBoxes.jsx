@@ -2,37 +2,40 @@ import { styled } from "styled-components"
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function CatBoxes(props) {
+export default function CatBoxes() {
 
-    const [catData, setCatData] = useState('');
+    const [catData, setCatData] = useState([]);
 
-        useEffect(() => {
-            const token = localStorage.getItem('token');
-            const config = {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            };
-            const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
-                .then((res) => { setCatData(res.data) })
-                .catch((err) => { alert(err) });
-        }, [])
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        const config = {
+            headers: {
+                "Authentication": `Bearer ${token}`
+            }
+        };
+
+        const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
+            promise.then((res) => { console.log(res.data)})
+            promise.catch((err) => { alert(err) });
+    }, [])
 
 
-return (
-    catData.map((cat, index) => (
-        <CatBox key={index}>
-            <CatImage src={cat.image} />
-            <ContainerCat>
-                <h1>{cat.name}</h1>
-                <ContainerCat style={{ flexDirection: 'column', width: '50%' }}>
-                    <p>{cat.color}</p>
-                    <p>{cat.breed}</p>
-                </ContainerCat>
-            </ContainerCat>
-        </CatBox>
-    ))
-)
+    return (
+        <>
+            {catData && catData.map((cat, index) => (
+                    <CatBox key={index}>
+                        <CatImage src={cat.image} />
+                        <ContainerCat>
+                            <h1>{cat.name}</h1>
+                            <ContainerCat style={{ flexDirection: 'column', width: '50%' }}>
+                                <p>{cat.color}</p>
+                                <p>{cat.breed}</p>
+                            </ContainerCat>
+                        </ContainerCat>
+                    </CatBox>
+                ))}
+        </>
+    )
 }
 
 

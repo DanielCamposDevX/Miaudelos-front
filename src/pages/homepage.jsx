@@ -3,21 +3,12 @@ import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 
 export default function Home() {
 
     const navigate = useNavigate();
-
-    const catData = [
-        { name: "Mittensa", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
-    ];
 
     useEffect(()=>{
         const token = localStorage.getItem('token');
@@ -33,7 +24,7 @@ export default function Home() {
             </Header>
             <Container>
                 {
-                    <CatBoxes catData={catData} />
+                    <CatBoxes  />
                 }
             </Container>
         </Page>
