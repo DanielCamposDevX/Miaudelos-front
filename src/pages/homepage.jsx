@@ -1,8 +1,96 @@
+import { styled } from "styled-components"
+import Logo from '../assets/Logo.png'
+import CatBoxes from "../components/catBoxes";
 
 
-export default function Home(){
-    return(
-        <>
-        </>
+export default function Home() {
+
+    const catData = [
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+        { name: "Mittens", age: "12 anos", description: "Malhadinho", imageUrl: "https://www.petz.com.br/blog/wp-content/uploads/2020/08/cat-sitter-felino-1280x720.jpg" },
+    ];
+    return (
+        <Page>
+            <CusImg src={Logo} />
+            <Header>
+                <Search placeholder="Nome do Miaudelo" />
+            </Header>
+            <Container>
+                {
+                    <CatBoxes catData={catData} />
+                }
+            </Container>
+        </Page>
     )
 }
+
+
+
+const Page = styled.div`
+    width: 100%;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content: space-around;
+    font-family: 'Lexend Deca', sans-serif;
+    background-image: url('https://i.pinimg.com/564x/5d/1a/8c/5d1a8c25ed26554708c3f633509e4c91.jpg');
+    background-size: cover;
+    background-position: center;
+`;
+
+const Header = styled.div`
+    font-family: 'Lexend Deca', sans-serif;
+    height: 20vh;
+    width: 100%;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+
+`
+
+const Search = styled.input`
+    padding-left: 5%;
+    width: 71%;
+    height: 35px;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.15);
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 24px 0px #383d345a;
+`;
+
+const CusImg = styled.img`
+    margin-top: 20px;
+    height: 20vh;
+    border-radius: 12px;
+    border: 1px solid rgba(0,0,0,0.1);
+    box-shadow: 0px 4px 24px 0px #383d3499;
+    padding-top:5px;
+    padding-bottom:5px;
+    background-color:white;
+    @media (max-width: 500px) {
+        height: 15vh; 
+    }
+`
+
+const Container = styled.div`
+    flex-wrap: wrap;
+    width: 90%;
+    max-width: 1000px;
+    display:flex;  
+    padding-top: 30px;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff4b;
+    border-radius: 12px;
+    border: 1px solid black;
+    @media (min-width: 660px) {
+        padding-left: 30px;
+    }
+`
+

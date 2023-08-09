@@ -24,7 +24,7 @@ export default function Login() {
  }
 
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} style={{width:'100%', height:'100vh'}}>
             <Page>
                 <Fade>
                     <CusImg src={Logo} />
@@ -72,6 +72,9 @@ const CusImg = styled.img`
     padding-top:5px;
     padding-bottom:5px;
     background-color:white;
+    @media (max-width: 500px) {
+        height: 15vh; 
+    }
 `
 
 const Search = styled.input`
