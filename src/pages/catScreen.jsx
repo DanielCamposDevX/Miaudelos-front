@@ -30,14 +30,14 @@ export default function Catscreen() {
             <Container>
                 {data &&
                     <>
-                        <CatImage src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR6OJpBLZMQLVb2MPZ7o1F-C378KI5237GmWDKqYoGrTF3AAdhJUXCFZ8uC429YS56dgvs&usqp=CAU" />
+                        <CatImage src={data.image} />
                         <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
                             <TextCont>  <h1>Nome:</h1>   <h2>Raça:</h2>  <h2>Dono:</h2> </TextCont>
-                            <TextCont style={{ textAlign: 'end' }}>  <h1>Mittens</h1>   <h2>Persa</h2>  <h2>Dono</h2></TextCont>
+                            <TextCont style={{ textAlign: 'end' }}>  <h1>{data.name}</h1>   <h2>{data.breed}</h2>  <h2>{data.username}</h2></TextCont>
                         </div>
                         <Description>
                             <h2>Descrição:</h2>
-                            <p></p>
+                            <p>{data.description}</p>
                         </Description>
                     </>
                 }
