@@ -1,41 +1,49 @@
-import styled from 'styled-components'
-import { Link, useNavigate } from 'react-router-dom';
+import styled from 'styled-components';
+import { useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png'
 import axios from 'axios'
 import { useState } from 'react';
+import { LoadingButton } from '@mui/lab';
+import { TextField, CircularProgress } from '@mui/material';
 
 
 export default function Login() {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     function handleSubmit(event) {
+        setLoading(true);
         event.preventDefault();
-        const promise = axios.post(`${import.meta.env.VITE_URL}/login`,{email,password})
-        .then((res)=>{
-            localStorage.setItem('token',res.data)
-            navigate('/home')
-        })
-        .catch((error) => {
-            alert(error)
-        })
- }
+        const promise = axios.post(`${import.meta.env.VITE_URL}/login`, { email, password })
+            .then((res) => {
+                localStorage.setItem('token', res.data)
+                setLoading(false);
+                navigate('/home')
+            })
+            .catch((error) => {
+                setLoading(false);
+                alert(error)
+            })
+    }
+
+    
 
     return (
-        <form onSubmit={handleSubmit} style={{width:'100%', height:'100vh'}}>
+        <form onSubmit={handleSubmit} style={{ width: '100%', height: '100vh' }}>
             <Page>
                 <Fade>
                     <CusImg src={Logo} />
                     <Container>
-                        <Search type='email' placeholder='email' required value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <Search type='password' placeholder='senha' required value={password} onChange={(e) => setPassword(e.target.value)} />
+                        <Search variant="filled" type='email' label='Email' color='secondary' required value={email} onChange={(e) => setEmail(e.target.value)} />
+                        <Search variant="filled" type='password' label='Senha' color='secondary' required value={password} onChange={(e) => setPassword(e.target.value)} />
                     </Container>
                     <Container>
-                        <Sbutton type='submit'>Entrar</Sbutton>
-                        <Sbutton style={{ backgroundColor: 'orange' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
+                        <Sbutton variant="contained"   loading={loading} style={{ backgroundColor: 'purple',fontWeight: '700',  fontFamily: 'Lexend Deca',textTransform: 'none'}} type='submit'>Entrar</Sbutton>
+                        <Sbutton variant="contained"  loading={loading} style={{ backgroundColor: 'orange', marginTop: '20px',fontWeight: '700',  fontFamily: 'Lexend Deca',textTransform: 'none'}} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
                     </Container>
                 </Fade>
             </Page>
@@ -78,29 +86,16 @@ const CusImg = styled.img`
     }
 `
 
-const Search = styled.input`
-    padding-left: 5%;
-    width: 71%;
-    height: 35px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.15);
-    box-shadow: 0px 4px 24px 0px #78B1591F;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 24px 0px #383d345a;
-`
+const Search = styled(TextField)({
+    backgroundColor: '#ffffffe4',
+    fontFamily: 'inherit'
+})
 
-const Sbutton = styled.button`
-    width: 30%;
-    height: 35px;
-    border-radius: 12px;
-    border:none;
-    color:white;
-    background-color: #222520;
-    font-weight: 700;
-    font-family: 'Lexend Deca', sans-serif;
-    margin-top: 20px;
-    box-shadow: 0px 4px 24px 0px #383d3499;
-`
+const Sbutton = styled(LoadingButton)({
+    fontWeight: '700', 
+    fontFamily: 'Lexend Deca',
+    textTransform: 'none'
+})
 
 const Container = styled.div`
     flex-direction:column;

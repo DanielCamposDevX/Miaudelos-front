@@ -3,23 +3,26 @@ import { Link, useNavigate } from 'react-router-dom';
 import Logo from '../assets/Logo.png'
 import { useState } from 'react';
 import axios from 'axios';
-
+import { LoadingButton } from '@mui/lab';
+import { TextField } from '@mui/material';
 
 
 export default function Cadastro() {
-    
-    
+
+
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cpass, setCpass] = useState('');
     const [name, setName] = useState('');
     const [cpf, setCpf] = useState('');
     const [phone, setPhone] = useState('');
+    const [loading, setLoading] = useState(false);
 
     const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
+        setLoading(true);
         if (password !== cpass) {
             alert('Senhas devem ser iguais');
             return 0;
@@ -31,8 +34,14 @@ export default function Cadastro() {
             cpf,
             phone
         })
-        .then((res)=>{console.log(res)})
-        .catch((res)=> {console.log(res)})
+            .then((res) => {
+                console.log(res);
+                setLoading(false);
+            })
+            .catch((res) => {
+                console.log(res);
+                setLoading(false);
+            })
 
     }
 
@@ -42,14 +51,14 @@ export default function Cadastro() {
                 <Fade>
                     <CusImg src={Logo} />
                     <Container>
-                        <Search type='text' value={name} onChange={(e) => setName(e.target.value)} placeholder='Nome' />
-                        <Search type='text' value={cpf} onChange={(e) => setCpf(e.target.value)} placeholder='CPF' />
-                        <Search type='email' value={email} onChange={(e) => setEmail(e.target.value)} placeholder='Email' />
-                        <Search type='password' value={password} onChange={(e) => setPassword(e.target.value)} placeholder='Senha' />
-                        <Search type='password' value={cpass} onChange={(e) => setCpass(e.target.value)} placeholder='Confirmar senha' />
-                        <Search type='tel' value={phone} onChange={(e) => setPhone(e.target.value)} placeholder='Telefone' />
-                        <Sbutton type='submit' style={{ backgroundColor: 'orange' }}>Cadastrar-se</Sbutton>
-                        <Sbutton onClick={() => { navigate('/') }}>Já tenho cadastro</Sbutton>
+                        <Search type='text' color='secondary' value={name} onChange={(e) => setName(e.target.value)} label='Nome' variant="filled" />
+                        <Search type='text' color='secondary' value={cpf} onChange={(e) => setCpf(e.target.value)} label='CPF' variant="filled" />
+                        <Search type='email' color='secondary' value={email} onChange={(e) => setEmail(e.target.value)} label='Email' variant="filled" />
+                        <Search type='password' color='secondary' value={password} onChange={(e) => setPassword(e.target.value)} label='Senha' variant="filled" />
+                        <Search type='password' color='secondary' value={cpass} onChange={(e) => setCpass(e.target.value)} label='Confirmar senha' variant="filled" />
+                        <Search type='tel' color='secondary' value={phone} onChange={(e) => setPhone(e.target.value)} label='Telefone' variant="filled" />
+                        <Sbutton variant="contained" loading={loading}  style={{ backgroundColor: 'orange', marginTop: '20px', fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} type='submit'>Cadastrar</Sbutton>
+                        <Sbutton variant="contained" loading={loading}  style={{ backgroundColor: 'purple', marginTop: '20px', fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/') }}>Já tenho login</Sbutton>
                     </Container>
                 </Fade>
             </Page>
@@ -89,35 +98,20 @@ const CusImg = styled.img`
     background-color:white;
 `
 
-const Search = styled.input`
-    padding-left: 5%;
-    width: 71%;
-    height: 35px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.15);
-    box-shadow: 0px 4px 24px 0px #78B1591F;
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 24px 0px #383d345a;
-`
+const Search = styled(TextField)({
+    backgroundColor: '#ffffffc1',
+})
 
-const Sbutton = styled.button`
-    width: 30%;
-    height: 35px;
-    border-radius: 12px;
-    border:none;
-    color:white;
-    background-color: #222520;
-    font-weight: 700;
-    font-family: 'Lexend Deca', sans-serif;
-    margin-top: 20px;
-    box-shadow: 0px 4px 24px 0px #383d3499;
-`
+const Sbutton = styled(LoadingButton)({
+
+})
+
 
 const Container = styled.div`
     flex-direction:column;
     display:flex;
     width: 100%;
     align-items: center;
-    justify-content: center;
+    justify-content: space-around;
 
 `

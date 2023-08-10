@@ -1,8 +1,9 @@
-import { styled } from "styled-components"
+import styled from 'styled-components';
 import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { TextField } from '@mui/material';
 
 
 export default function Home() {
@@ -19,7 +20,7 @@ export default function Home() {
         <Page>
             <CusImg src={Logo} />
             <Header>
-                <Search placeholder="Nome do Miaudelo" />
+                <Search variant="outlined" color='secondary'placeholder="Nome do Miaudelo" />
             </Header>
             <Container>
                 {
@@ -55,15 +56,11 @@ const Header = styled.div`
 
 `
 
-const Search = styled.input`
-    padding-left: 5%;
-    width: 71%;
-    height: 35px;
-    border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.15);
-    margin-bottom: 20px;
-    box-shadow: 0px 4px 24px 0px #383d345a;
-`;
+const Search = styled(TextField)({
+    backgroundColor: '#ffffffe4',
+    fontFamily: 'inherit',
+    borderRadius: '12px'
+})
 
 const CusImg = styled.img`
     margin-top: 20px;
