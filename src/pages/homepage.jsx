@@ -3,7 +3,6 @@ import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
 
 
 export default function Home() {

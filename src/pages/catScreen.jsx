@@ -6,7 +6,7 @@ import axios from "axios";
 export default function Catscreen() {
 
     const token = localStorage.getItem('token');
-    const { cat } = useParams()
+    const { id } = useParams()
     const [data, setData] = useState([]);
 
     useEffect(() => {
@@ -14,8 +14,8 @@ export default function Catscreen() {
             headers: {
                 "Authorization": `Bearer ${token}`
             }
-        }
-        const promise = axios.get(`/cats/${cat}`, config)
+        };
+        const promise = axios.get(`${import.meta.env.VITE_URL}/cats/${id}`, config)
         promise.then((res) => {
             setData(res.data)
         })
