@@ -15,7 +15,7 @@ export default function CatBoxes() {
         };
 
         const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
-            promise.then((res) => { console.log(res.data)})
+            promise.then((res) => { setCatData(res.data)})
             promise.catch((err) => { alert(err) });
     }, [])
 
