@@ -10,7 +10,7 @@ export default function CatBoxes() {
         const token = localStorage.getItem('token');
         const config = {
             headers: {
-                "Authentication": `Bearer ${token}`
+                "Authorization": `Bearer ${token}`
             }
         };
 
