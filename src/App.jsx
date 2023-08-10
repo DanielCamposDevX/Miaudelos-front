@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Login, Home,Cadastro } from './pages/indexpages'
+import { Login, Home,Cadastro, Catscreen } from './pages/indexpages'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
@@ -11,6 +11,7 @@ function App() {
         <Route path='/' element={<Login />} />
         <Route path='/home' element={<Home />} />
         <Route path='/cadastro' element={<Cadastro />} />
+        <Route path='/cats/:catId' element={<Catscreen />} />
       </Routes>
     </BrowserRouter>
   )

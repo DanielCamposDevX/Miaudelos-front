@@ -1,10 +1,13 @@
 import { styled } from "styled-components"
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function CatBoxes() {
 
+    const navigate = useNavigate();
     const [catData, setCatData] = useState([]);
+
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -15,25 +18,29 @@ export default function CatBoxes() {
         };
 
         const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
-            promise.then((res) => { setCatData(res.data)})
-            promise.catch((err) => { alert(err) });
+        promise.then((res) => { setCatData(res.data) })
+        promise.catch((err) => { alert(err) });
     }, [])
+
+    function handleClick(id){
+        navigate(`/cats/${id}`);
+    }
 
 
     return (
         <>
-            {catData && catData.map((cat, index) => (
-                    <CatBox key={index}>
-                        <CatImage src={cat.image} />
-                        <ContainerCat>
-                            <h1>{cat.name}</h1>
-                            <ContainerCat style={{ flexDirection: 'column', width: '50%' }}>
-                                <p>{cat.color}</p>
-                                <p>{cat.breed}</p>
-                            </ContainerCat>
+            {catData && catData.map((cat) => (
+                <CatBox key={cat.id} onClick={() => { handleClick(cat.id) }}>
+                    <CatImage src={cat.image} />
+                    <ContainerCat>
+                        <h1>{cat.name}</h1>
+                        <ContainerCat style={{ flexDirection: 'column', width: '50%', backgroundColor: 'transparent' }}>
+                            <p>{cat.color}</p>
+                            <p>{cat.breed}</p>
                         </ContainerCat>
-                    </CatBox>
-                ))}
+                    </ContainerCat>
+                </CatBox>
+            ))}
         </>
     )
 }
