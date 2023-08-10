@@ -17,7 +17,7 @@ export default function Catscreen() {
         };
         const promise = axios.get(`${import.meta.env.VITE_URL}/cats/${id}`, config)
         promise.then((res) => {
-            setData(res.data)
+            setData(res.data);
         })
         promise.catch((res) => {
             alert(res)
@@ -32,13 +32,22 @@ export default function Catscreen() {
                     <>
                         <CatImage src={data.image} />
                         <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
-                            <TextCont>  <h1>Nome:</h1>   <h2>Raça:</h2>  <h2>Dono:</h2> </TextCont>
-                            <TextCont style={{ textAlign: 'end' }}>  <h1>{data.name}</h1>   <h2>{data.breed}</h2>  <h2>{data.username}</h2></TextCont>
+                            <TextCont>  <h1>Nome:</h1>   <h2>Raça:</h2>  <h2>Dono:</h2> <h2>Contato:</h2></TextCont>
+                            <TextCont style={{ textAlign: 'end' }}>  <h1>{data.name}</h1>   <h2>{data.breed}</h2>  <h2>{data.username}</h2> <h2>{data.contato}</h2></TextCont>
                         </div>
                         <Description>
                             <h2>Descrição:</h2>
                             <p>{data.description}</p>
                         </Description>
+                        <Comments>
+                    <h1>Avaliações:</h1>
+                    <Comment>
+                    <h2>Usuaŕia:</h2>
+                    <p>o gato mais fofo do universo tem nome e é oreo Nota 1000</p>
+                    </Comment>
+                
+                    
+                    </Comments>
                     </>
                 }
             </Container>
@@ -84,9 +93,9 @@ const Container = styled.div`
     flex-direction: column;
     display:flex;
     width: 80%;
-    height: 90vh;
+    min-height: 90vh;
     align-items: center;
-    justify-content: center;
+
     background-color: #ffffff;
     z-index:10;
     border-radius: 12px;
@@ -118,4 +127,18 @@ const TextCont = styled.div`
     width:30%;
     display: flex;
     flex-direction: column;
+`
+const Comments = styled.div`
+    width: 80%;
+
+`
+
+const Comment = styled.div`
+    width: 100%;
+    p {
+        font-family: 'Lexend Deca', sans-serif;
+        font-size: 14px;
+        font-weight: 300;
+        white-space: pre-wrap; 
+    }
 `
