@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../assets/Logo.png'
+import LogoName from '../assets/LogoName.png'
 import { useState } from 'react';
 import axios from 'axios';
 import { LoadingButton } from '@mui/lab';
@@ -35,11 +35,11 @@ export default function Cadastro() {
             phone
         })
             .then((res) => {
-                console.log(res);
                 setLoading(false);
+                navigate('/login');
             })
             .catch((res) => {
-                console.log(res);
+                alert(res.response.data);
                 setLoading(false);
             })
 
@@ -49,16 +49,16 @@ export default function Cadastro() {
         <form onSubmit={handleSubmit}>
             <Page>
                 <Fade>
-                    <CusImg src={Logo} />
+                    <CusImg src={LogoName} />
                     <Container>
-                        <Search type='text' color='secondary' value={name} onChange={(e) => setName(e.target.value)} label='Nome' variant="filled" />
-                        <Search type='text' color='secondary' value={cpf} onChange={(e) => setCpf(e.target.value)} label='CPF' variant="filled" />
-                        <Search type='email' color='secondary' value={email} onChange={(e) => setEmail(e.target.value)} label='Email' variant="filled" />
-                        <Search type='password' color='secondary' value={password} onChange={(e) => setPassword(e.target.value)} label='Senha' variant="filled" />
-                        <Search type='password' color='secondary' value={cpass} onChange={(e) => setCpass(e.target.value)} label='Confirmar senha' variant="filled" />
-                        <Search type='tel' color='secondary' value={phone} onChange={(e) => setPhone(e.target.value)} label='Telefone' variant="filled" />
+                        <Search type='text' color='secondary' value={name} onChange={(e) => setName(e.target.value)} sx={{marginBottom: '10px'}}label='Nome' variant="standard" required/>
+                        <Search type='text' color='secondary' value={cpf} onChange={(e) => setCpf(e.target.value)} sx={{marginBottom: '10px'}}label='CPF' variant="standard" required/>
+                        <Search type='email' color='secondary' value={email} onChange={(e) => setEmail(e.target.value)} sx={{marginBottom: '10px'}}label='Email' variant="standard" required/>
+                        <Search type='password' color='secondary' value={password} onChange={(e) => setPassword(e.target.value)} sx={{marginBottom: '10px'}}label='Senha' variant="standard" required/>
+                        <Search type='password' color='secondary' value={cpass} onChange={(e) => setCpass(e.target.value)} sx={{marginBottom: '10px'}}label='Confirmar senha' variant="standard" required/>
+                        <Search type='tel' color='secondary' value={phone} onChange={(e) => setPhone(e.target.value)} sx={{marginBottom: '10px'}}label='Telefone' variant="standard" required/>
                         <Sbutton variant="contained" loading={loading}  style={{ backgroundColor: 'orange', marginTop: '20px', fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} type='submit'>Cadastrar</Sbutton>
-                        <Sbutton variant="contained" loading={loading}  style={{ backgroundColor: 'purple', marginTop: '20px', fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/') }}>Já tenho login</Sbutton>
+                        <Sbutton variant="contained"  style={{ backgroundColor: 'purple', marginTop: '20px', fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/') }}>Já tenho login</Sbutton>
                     </Container>
                 </Fade>
             </Page>
@@ -91,15 +91,18 @@ const Page = styled.div`
 const CusImg = styled.img`
     height: 20vh;
     border-radius: 12px;
-    border: 1px solid rgba(0,0,0,0.1);
-    box-shadow: 0px 4px 24px 0px #383d3499;
+    border: 1px solid rgb(144, 55, 196);
+    box-shadow: 0px 4px 24px 0px #c858df99;
     padding-top:5px;
     padding-bottom:5px;
-    background-color:white;
+    background-color:#ffffff;
+    @media (max-width: 500px) {
+        height: 15vh; 
+    }
 `
 
 const Search = styled(TextField)({
-    backgroundColor: '#ffffffc1',
+
 })
 
 const Sbutton = styled(LoadingButton)({
@@ -110,8 +113,16 @@ const Sbutton = styled(LoadingButton)({
 const Container = styled.div`
     flex-direction:column;
     display:flex;
-    width: 100%;
+    width: 90%;
+    max-width: 400px;
     align-items: center;
     justify-content: space-around;
-
+    background-color:#ffffffdf;
+    padding-top: 20px;
+    padding-bottom:20px;
+    border-radius: 15px;
+    border: 1px solid black;
+    @media (max-width: 500px) {
+        width: 80% 
+    }
 `

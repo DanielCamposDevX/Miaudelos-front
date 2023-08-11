@@ -4,7 +4,7 @@ import Name from '../assets/LogoName.png'
 import axios from 'axios'
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
-import { TextField, CircularProgress } from '@mui/material';
+import { TextField } from '@mui/material';
 
 
 
@@ -27,7 +27,8 @@ export default function Login() {
             })
             .catch((error) => {
                 setLoading(false);
-                alert(error)
+                console.log(error)
+                alert(error.response.data);
             })
     }
 
