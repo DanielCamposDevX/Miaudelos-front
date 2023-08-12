@@ -34,9 +34,9 @@ export default function CatBoxes() {
                     <CatImage src={cat.image} />
                     <ContainerCat>
                         <h1>{cat.name}</h1>
-                        <ContainerCat style={{ flexDirection: 'column', width: '50%', backgroundColor: 'transparent' }}>
-                            <p>{cat.color}</p>
+                        <ContainerCat style={{ flexDirection: 'column', width: '50%', backgroundColor: 'transparent', border: 'none' }}>
                             <p>{cat.breed}</p>
+                            <p>{cat.color}</p>
                         </ContainerCat>
                     </ContainerCat>
                 </CatBox>
@@ -50,16 +50,13 @@ export default function CatBoxes() {
 const CatBox = styled.div`
     z-index: 10;
     display: flex;
-    align-items: flex-end;
-    position: relative;
+    flex-direction: column;
     width: 75%;
     max-width: 300px;
-    height: 25vh;
-    max-height: 300px;
     border-radius: 12px;
     box-shadow: 0px 4px 24px 0px #383d345a;
     overflow: clip;
-    color: white;
+    color: black;
     margin-bottom: 30px;
 
     border: 1px solid rgb(255, 134, 209);
@@ -79,16 +76,15 @@ const CatBox = styled.div`
 
 const CatImage = styled.img`
     width:100%;
-    height: 100%;
-    position: absolute;
-`
+    `
 const ContainerCat = styled.div`
     flex-direction: flex;
     display:flex;
     width: 100%;
     align-items: center;
     justify-content: space-around;
-    background-color: #77006d56;
+    background-color: #ffffff;
     z-index:10;
-    height: 30%;
+    height: 50px;
+    border-top: 1px solid black;
 `
