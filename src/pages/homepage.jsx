@@ -190,14 +190,14 @@ const Box = styled.div`
     left:0px;
     width: 100%;
     height: 100%;
-    background-color: #ffffff8b;
+    background-color: #ffffff42;
     z-index: 1100;
 
 `
 
 const UserContainer = styled.div`
     position: absolute;
-    top: 0px;
+    top: 10vh;
     left: 0px;
     background-color: #f3f1f1;
     z-index: 1101;
