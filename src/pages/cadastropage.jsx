@@ -36,7 +36,7 @@ export default function Cadastro() {
         })
             .then((res) => {
                 setLoading(false);
-                navigate('/login');
+                navigate('/');
             })
             .catch((res) => {
                 alert(res.response.data);

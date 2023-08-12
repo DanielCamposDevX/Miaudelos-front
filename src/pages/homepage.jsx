@@ -1,13 +1,16 @@
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
-import { useEffect,useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import CatBreeds from '../components/catBreeds';
 import { CircularProgress } from '@mui/material';
+import AddIcon from '@mui/icons-material/Add';
+import LogoutIcon from '@mui/icons-material/Logout';
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import axios from 'axios';
 
 
@@ -16,7 +19,8 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [catData, setCatData] = useState([]);
-    const [loading,setLoading] = useState(false);
+    const [loading, setLoading] = useState(false);
+    const [user, setUser] = useState(false);
 
 
     useEffect(() => {
@@ -30,9 +34,10 @@ export default function Home() {
         };
 
         const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
-        promise.then((res) => { 
-            setCatData(res.data); 
-            setLoading(false); })
+        promise.then((res) => {
+            setCatData(res.data);
+            setLoading(false);
+        })
         promise.catch((err) => { alert(err) });
     }, [])
 
@@ -40,17 +45,27 @@ export default function Home() {
     return (
         <Page>
             <Header>
-                <IconButton sx={{ color: 'purple' }}><AccountCircleIcon sx={{ fontSize: '30px' }} /></IconButton>
+                <IconButton sx={{ color: 'purple' }} onClick={() => { setUser(true) }}><AccountCircleIcon sx={{ fontSize: '30px' }} /></IconButton>
                 <CusImg src={Logo} />
                 <IconButton sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
             </Header>
+            {user &&
+                <Box onClick={() => { setUser(false) }}>
+                    <UserContainer>
+                        <Line onClick={() => { navigate('/')} }>Bem Vindo X<AccountCircleIcon /></Line>
+                        <Line>Adicionar Novo Gato <AddIcon /></Line>
+                        <Line>Minhas Informações <ContactEmergencyIcon /></Line>
+                        <Line>Logout <LogoutIcon /></Line>
+                    </UserContainer>
+                </Box>
+            }
             <Breeds>
-                <CatBreeds setCatData={setCatData} setLoading={setLoading} loading={loading}/>
+                <CatBreeds setCatData={setCatData} setLoading={setLoading} loading={loading} />
             </Breeds>
             <Container>
                 {
                     !loading &&
-                    <CatBoxes catData={catData}/>
+                    <CatBoxes catData={catData} />
                 }
                 {
                     loading &&
@@ -167,4 +182,41 @@ const Breeds = styled.div`
         top: center;
     }
 
+`
+
+const Box = styled.div`
+    position: fixed;
+    top:0px;
+    left:0px;
+    width: 100%;
+    height: 100%;
+    background-color: #ffffff8b;
+    z-index: 1100;
+
+`
+
+const UserContainer = styled.div`
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: #f3f1f1;
+    z-index: 1101;
+    width: 400px;
+    height: 500px;
+    border: 1px solid gray;
+    border-radius: 10px;
+`
+
+const Line = styled.div`
+    width:90%;
+    height: 15%;
+    border-bottom: 1px solid #ffe600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 600;
+    padding-left: 5%;
+    padding-right: 5%;
+    color: purple;
 `
