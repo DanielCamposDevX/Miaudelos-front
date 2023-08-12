@@ -3,33 +3,18 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-export default function CatBoxes() {
+export default function CatBoxes(props) {
 
     const navigate = useNavigate();
-    const [catData, setCatData] = useState([]);
+    
 
-
-    useEffect(() => {
-        const token = localStorage.getItem('token');
-        const config = {
-            headers: {
-                "Authorization": `Bearer ${token}`
-            }
-        };
-
-        const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
-        promise.then((res) => { setCatData(res.data) })
-        promise.catch((err) => { alert(err) });
-    }, [])
-
-    function handleClick(id){
+    function handleClick(id) {
         navigate(`/cats/${id}`);
     }
 
-
     return (
         <>
-            {catData && catData.map((cat) => (
+            {props.catData && props.catData.map((cat) => (
                 <CatBox key={cat.id} onClick={() => { handleClick(cat.id) }}>
                     <CatImage src={cat.image} />
                     <ContainerCat>

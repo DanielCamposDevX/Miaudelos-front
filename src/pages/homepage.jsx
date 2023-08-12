@@ -1,25 +1,41 @@
 import styled from 'styled-components';
 import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
-import { useEffect } from "react";
+import { useEffect,useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { TextField, IconButton } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import CatBreeds from '../components/catBreeds';
 import { CircularProgress } from '@mui/material';
+import axios from 'axios';
 
 
 
 export default function Home() {
 
     const navigate = useNavigate();
+    const [catData, setCatData] = useState([]);
+    const [loading,setLoading] = useState(false);
+
 
     useEffect(() => {
+        setLoading(true);
         const token = localStorage.getItem('token');
         if (!token) { navigate('/') };
+        const config = {
+            headers: {
+                "Authorization": `Bearer ${token}`
+            }
+        };
 
+        const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
+        promise.then((res) => { 
+            setCatData(res.data); 
+            setLoading(false); })
+        promise.catch((err) => { alert(err) });
     }, [])
+
 
     return (
         <Page>
@@ -29,16 +45,16 @@ export default function Home() {
                 <IconButton sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
             </Header>
             <Breeds>
-                <CatBreeds />
+                <CatBreeds setCatData={setCatData} setLoading={setLoading} loading={loading}/>
             </Breeds>
             <Container>
                 {
-                    CatBoxes &&
-                    <CatBoxes />
+                    !loading &&
+                    <CatBoxes catData={catData}/>
                 }
                 {
-                    !CatBoxes &&
-                    <CircularProgress size={80} color="warning" />
+                    loading &&
+                    <CircularProgress size={80} color="inherit" />
                 }
             </Container>
         </Page>
@@ -56,6 +72,7 @@ const Page = styled.div`
     align-items:center;
     font-family: 'Lexend Deca', sans-serif;
     background-color:#f3f1f1;
+    position: relative;
     
 `;
 
@@ -101,17 +118,53 @@ const Container = styled.div`
     @media (min-width: 660px) {
         padding-left: 30px;
     }
+    @media (min-width: 1400px) {
+        margin-top: 30px;
+    }
 `
 
 const Breeds = styled.div`
     display: flex;
-    width: 80%;
-    height: 40px;
+    width: 90%;
+    height: 42px;
     margin-top: 30px;
     margin-bottom: 30px;
     overflow-x:scroll;
     overflow-y: clip;
     ::-webkit-scrollbar {
-    display: none;
+    height: 5px;
+    border: none;
+
     }
+
+    ::-webkit-scrollbar-track {
+    border-radius: 10px;
+    border: none;
+
+    }
+
+
+
+    ::-webkit-scrollbar-thumb {
+    background: #a8a8a8; 
+    border: none;
+    border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+    background: yellow; 
+    border: none;
+}
+    @media (min-width: 1400px) {
+        flex-direction: column;
+        align-items: space-between;
+        justify-content: space-between;
+        height: 800px;
+        width:  200px;  
+        overflow-y: scroll;
+        position: absolute;
+        left: 10px;
+        top: center;
+    }
+
 `
