@@ -3,15 +3,12 @@ import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, IconButton } from '@mui/material';
+import { TextField, IconButton, Button,CircularProgress, ButtonGroup } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import CatBreeds from '../components/catBreeds';
-import { CircularProgress } from '@mui/material';
-import AddIcon from '@mui/icons-material/Add';
-import LogoutIcon from '@mui/icons-material/Logout';
-import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import axios from 'axios';
+import UserContainer from '../components/userContainer';
 
 
 
@@ -21,10 +18,12 @@ export default function Home() {
     const [catData, setCatData] = useState([]);
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(false);
+    const [name, setName] = useState('');
 
 
     useEffect(() => {
         setLoading(true);
+        setName(localStorage.getItem('user'));
         const token = localStorage.getItem('token');
         if (!token) { navigate('/') };
         const config = {
@@ -51,12 +50,7 @@ export default function Home() {
             </Header>
             {user &&
                 <Box onClick={() => { setUser(false) }}>
-                    <UserContainer>
-                        <Line onClick={() => { navigate('/')} }>Bem Vindo X<AccountCircleIcon /></Line>
-                        <Line>Adicionar Novo Gato <AddIcon /></Line>
-                        <Line>Minhas Informações <ContactEmergencyIcon /></Line>
-                        <Line>Logout <LogoutIcon /></Line>
-                    </UserContainer>
+                    <UserContainer name={name} />
                 </Box>
             }
             <Breeds>
@@ -107,13 +101,6 @@ const Header = styled.div`
     align-items:center;
     border-bottom: 1px solid gray;
 `
-
-const Search = styled(TextField)({
-    backgroundColor: '#ffffffe4',
-    fontFamily: 'inherit',
-    borderRadius: '12px'
-})
-
 const CusImg = styled.img`
     height: 14vh;
 `
@@ -195,28 +182,5 @@ const Box = styled.div`
 
 `
 
-const UserContainer = styled.div`
-    position: absolute;
-    top: 10vh;
-    left: 0px;
-    background-color: #f3f1f1;
-    z-index: 1101;
-    width: 400px;
-    height: 500px;
-    border: 1px solid gray;
-    border-radius: 10px;
-`
 
-const Line = styled.div`
-    width:90%;
-    height: 15%;
-    border-bottom: 1px solid #ffe600;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 20px;
-    font-weight: 600;
-    padding-left: 5%;
-    padding-right: 5%;
-    color: purple;
-`
+

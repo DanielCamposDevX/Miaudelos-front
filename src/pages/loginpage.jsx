@@ -21,7 +21,8 @@ export default function Login() {
         event.preventDefault();
         const promise = axios.post(`${import.meta.env.VITE_URL}/login`, { email, password })
             .then((res) => {
-                localStorage.setItem('token', res.data)
+                localStorage.setItem('token', res.data.token);
+                localStorage.setItem('user',res.data.name);
                 setLoading(false);
                 navigate('/home')
             })
