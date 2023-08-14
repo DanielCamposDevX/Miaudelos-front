@@ -4,14 +4,24 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import { useEffect, useState } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
+import { TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab";
+
 
 export default function CatComments(props) {
 
     const [comments, setComments] = useState([]);
+    const [text, setText] = useState('');
+    const [rate, setRate] = useState(0);
+    const [loading, setLoading] = useState(false)
+
+    const navigate = useNavigate()
 
     useEffect(() => {
         const promise = axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
             .then((res) => {
+                console.log(res)
                 setComments(res.data)
             })
             .catch((res) => {
@@ -19,15 +29,36 @@ export default function CatComments(props) {
             })
     }, [])
 
+    function NewComment() {
+        setLoading(true)
+        const userid = localStorage.getItem('id')
+        const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, [userid, text, rate])
+            .then(() => {
+                navigate(0);
+                setLoading(false)
+            })
+            .catch((res) => {
+                setLoading(false)
+                alert(res.data);
+            })
+
+    }
+
     return (
-        comments.map((comment) => (
+        <>
+            {comments.map((comment) => (
+                <Comment>
+                    <h2>{comment.name}:</h2>
+                    <StyledRating readOnly defaultValue={comment.rate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} />
+                    <p>{comment.text}</p>
+                </Comment>
+            ))}
             <Comment>
-                <h2>{comment.name}:</h2>
-                <StyledRating readOnly defaultValue={comment.rate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} />
-                <p>{coment.text}</p>
+                <StyledRating defaultValue={rate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} onChange={() => { setRate }} />
+                <TextField id="outlined-textarea" label="Comentário" multiline onChange={(e) => setText(e.target.value)}/>
+                <Sbutton onClick={NewComment} color='secondary' variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} type='submit'>Entrar</Sbutton>
             </Comment>
-        ))
-    )
+        </>)
 }
 
 const Comment = styled.div`
@@ -46,9 +77,16 @@ const Comment = styled.div`
 
 const StyledRating = styled(Rating)({
     '& .MuiRating-iconFilled': {
-        color: '#ff6d75',
+        color: '#660394',
     },
     '& .MuiRating-iconHover': {
-        color: '#ff3d47',
+        color: '#d400b8',
     },
 });
+
+const Sbutton = styled(LoadingButton)({
+    fontWeight: '700',
+    fontFamily: 'Lexend Deca',
+    textTransform: 'none',
+    zIndex: '20'
+})
