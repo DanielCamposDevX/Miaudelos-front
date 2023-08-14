@@ -33,7 +33,7 @@ export default function CatComments(props) {
         const userid = localStorage.getItem('id')
         const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, { userid, comment: text, rate })
             .then(() => {
-                navigate(0);
+                navigate(`/cats/${props.id}`);
                 setLoading(false)
             })
             .catch((res) => {
