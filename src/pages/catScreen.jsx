@@ -10,6 +10,7 @@ export default function Catscreen() {
     const [data, setData] = useState([]);
 
     useEffect(() => {
+        if (!token) { navigate('/') };
         const config = {
             headers: {
                 "Authorization": `Bearer ${token}`
@@ -95,7 +96,7 @@ const Container = styled.div`
     width: 80%;
     min-height: 90vh;
     align-items: center;
-
+    max-width: 500px;
     background-color: #ffffff;
     z-index:10;
     border-radius: 12px;

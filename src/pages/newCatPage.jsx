@@ -11,6 +11,7 @@ import Logo from '../assets/Logo.png'
 import FormBreeds from '../components/formBreeds';
 
 
+
 export default function NewCatPage() {
 
     const [name, setName] = useState('');
@@ -32,14 +33,14 @@ export default function NewCatPage() {
                 "Authorization": `Bearer ${token}`
             }
         };
-        const data ={
-                name,
-                image,
-                color,
-                breedid,
-                description
+        const data = {
+            name,
+            image,
+            color,
+            breedid,
+            description
         }
-        const promise = axios.post(`${import.meta.env.VITE_URL}/cats`,data,config)
+        const promise = axios.post(`${import.meta.env.VITE_URL}/cats`, data, config)
         promise.then((res) => {
             console.log(config);
             console.log(res);
@@ -55,13 +56,14 @@ export default function NewCatPage() {
 
 
     return (
+
         <form onSubmit={handleSubmit} style={{ width: '100%', height: '100vh' }}>
+            <Header>
+                <IconButton onClick={() => { navigate('/home') }} sx={{ color: 'purple' }} ><ArrowBackIcon sx={{ fontSize: '30px' }} /></IconButton>
+                <CusImg src={Logo} />
+                <IconButton sx={{ color: 'white' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
+            </Header>
             <Page>
-                <Header>
-                    <IconButton sx={{ color: 'purple' }} ><ArrowBackIcon sx={{ fontSize: '30px' }} /></IconButton>
-                    <CusImg src={Logo} />
-                    <IconButton sx={{ color: 'white' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
-                </Header>
                 <Fade>
                     <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99' }}>
                         <Search variant="filled" type='text' label='Name' color='secondary' required value={name} onChange={(e) => setName(e.target.value)} />
@@ -144,7 +146,7 @@ const Header = styled.div`
     position: fixed;
     top:0px;
     left:0px;
-    z-index: 1000;
+    z-index: 1001;
     height: 10vh;
     width: 92%;
     padding-left:4%;

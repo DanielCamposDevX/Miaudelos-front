@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 export default function CatBoxes(props) {
 
     const navigate = useNavigate();
-    
+
 
     function handleClick(id) {
         navigate(`/cats/${id}`);
@@ -14,18 +14,25 @@ export default function CatBoxes(props) {
 
     return (
         <>
-            {props.catData && props.catData.map((cat) => (
-                <CatBox key={cat.id} onClick={() => { handleClick(cat.id) }}>
-                    <CatImage src={cat.image} />
-                    <ContainerCat>
-                        <h1>{cat.name}</h1>
-                        <ContainerCat style={{ flexDirection: 'column', width: '50%', backgroundColor: 'transparent', border: 'none' }}>
-                            <p>{cat.breed}</p>
-                            <p>{cat.color}</p>
+            {props.catData.length === 0 ? (
+                <div style={{position: 'relative'}}>
+                    <CatImage style={{borderRadius: '12px'}}src="https://st3.depositphotos.com/4203211/32713/i/600/depositphotos_327130716-stock-photo-red-maine-coon-cat-laying.jpg" />
+                        <p style={{position: 'absolute', color: 'yellow', top: '10px', right: '0px', fontSize: '20px', fontFamily: 'Lexend Deca',backgroundColor:'black'}}>404 - NIOWNT FOUND!?</p>
+                </div>
+            ) : (
+                props.catData.map((cat) => (
+                    <CatBox key={cat.id} onClick={() => { handleClick(cat.id) }}>
+                        <CatImage src={cat.image} />
+                        <ContainerCat>
+                            <h1>{cat.name}</h1>
+                            <ContainerCat style={{ flexDirection: 'column', width: '50%', backgroundColor: 'transparent', border: 'none' }}>
+                                <p>{cat.breed}</p>
+                                <p>{cat.color}</p>
+                            </ContainerCat>
                         </ContainerCat>
-                    </ContainerCat>
-                </CatBox>
-            ))}
+                    </CatBox>
+                ))
+            )}
         </>
     )
 }
