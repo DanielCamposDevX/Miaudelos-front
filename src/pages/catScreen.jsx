@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import CatComments from "../components/catComments";
 
 export default function Catscreen() {
 
@@ -42,12 +43,7 @@ export default function Catscreen() {
                         </Description>
                         <Comments>
                     <h1>Avaliações:</h1>
-                    <Comment>
-                    <h2>Usuaŕia:</h2>
-                    <p>o gato mais fofo do universo tem nome e é oreo Nota 1000</p>
-                    </Comment>
-                
-                    
+                    <CatComments id={id}/>
                     </Comments>
                     </>
                 }
@@ -134,12 +130,3 @@ const Comments = styled.div`
 
 `
 
-const Comment = styled.div`
-    width: 100%;
-    p {
-        font-family: 'Lexend Deca', sans-serif;
-        font-size: 14px;
-        font-weight: 300;
-        white-space: pre-wrap; 
-    }
-`
