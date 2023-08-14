@@ -21,7 +21,6 @@ export default function CatComments(props) {
     useEffect(() => {
         const promise = axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
             .then((res) => {
-                console.log(res)
                 setComments(res.data)
             })
             .catch((res) => {
@@ -32,7 +31,7 @@ export default function CatComments(props) {
     function NewComment() {
         setLoading(true)
         const userid = localStorage.getItem('id')
-        const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, [userid, text, rate])
+        const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, { userid, comment: text, rate })
             .then(() => {
                 navigate(0);
                 setLoading(false)
@@ -47,15 +46,15 @@ export default function CatComments(props) {
     return (
         <>
             {comments.map((comment) => (
-                <Comment>
+                <Comment key={comment.id}>
                     <h2>{comment.name}:</h2>
                     <StyledRating readOnly defaultValue={comment.rate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} />
                     <p>{comment.text}</p>
                 </Comment>
             ))}
             <Comment>
-                <StyledRating defaultValue={rate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} onChange={() => { setRate }} />
-                <TextField id="outlined-textarea" label="Comentário" multiline onChange={(e) => setText(e.target.value)}/>
+                <StyledRating defaultValue={setRate} getLabelText={(value) => `${value} Heart${value !== 1 ? 's' : ''}`} precision={0.5} icon={<FavoriteIcon fontSize="inherit" />} emptyIcon={<FavoriteBorderIcon fontSize="inherit" />} onChange={(e) => setRate(e.target.value)} />
+                <TextField id="outlined-textarea" label="Comentário" multiline onChange={(e) => setText(e.target.value)} />
                 <Sbutton onClick={NewComment} color='secondary' variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none' }} type='submit'>Entrar</Sbutton>
             </Comment>
         </>)
@@ -67,6 +66,7 @@ const Comment = styled.div`
     border-radius: 12px;
     padding: 10px;
     box-shadow: 0px 4px 24px 0px #403c4222;
+    margin-bottom: 20px;
     p {
         font-family: 'Lexend Deca', sans-serif;
         font-size: 14px;
