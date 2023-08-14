@@ -3,12 +3,13 @@ import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, IconButton, Button,CircularProgress, ButtonGroup } from '@mui/material';
+import { TextField, IconButton, Button, CircularProgress, ButtonGroup } from '@mui/material';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import SearchIcon from '@mui/icons-material/Search';
 import CatBreeds from '../components/catBreeds';
 import axios from 'axios';
 import UserContainer from '../components/userContainer';
+import SearchCat from '../components/searchCat';
 
 
 
@@ -19,6 +20,8 @@ export default function Home() {
     const [loading, setLoading] = useState(false);
     const [user, setUser] = useState(false);
     const [name, setName] = useState('');
+    const [allCats, setAllCats] = useState([]);
+    const [search, setSearch] = useState(false);
 
 
     useEffect(() => {
@@ -35,6 +38,7 @@ export default function Home() {
         const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
         promise.then((res) => {
             setCatData(res.data);
+            setAllCats(res.data);
             setLoading(false);
         })
         promise.catch((err) => { alert(err) });
@@ -46,8 +50,9 @@ export default function Home() {
             <Header>
                 <IconButton sx={{ color: 'purple' }} onClick={() => { setUser(true) }}><AccountCircleIcon sx={{ fontSize: '30px' }} /></IconButton>
                 <CusImg src={Logo} />
-                <IconButton sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
+                <IconButton onClick={()=>{setSearch(!search)}} sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
             </Header>
+            {search && <SearchCat catData={catData} setCatData={setCatData} allCats={allCats} />}
             {user &&
                 <Box onClick={() => { setUser(false) }}>
                     <UserContainer name={name} />

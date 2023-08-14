@@ -40,6 +40,7 @@ const Container = styled.div`
     background-color: #f3f1f1;
     z-index: 1101;
     width: 400px;
+    max-width: 90%;
     height: 500px;
     border: 1px solid gray;
     border-radius: 10px;
