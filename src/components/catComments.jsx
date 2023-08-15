@@ -38,6 +38,8 @@ export default function CatComments(props) {
         const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, { userid, comment: text, rate })
             .then(() => {
                 navigate(`/cats/${props.id}`);
+                setText('');
+                setRate(0);
                 setLoading(false)
                 ReloadComments()
             })
