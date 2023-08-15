@@ -19,14 +19,18 @@ export default function CatComments(props) {
     const navigate = useNavigate()
 
     useEffect(() => {
-        const promise = axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
+       ReloadComments()
+    }, [])
+
+    function ReloadComments(){
+         const promise = axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
             .then((res) => {
                 setComments(res.data)
             })
             .catch((res) => {
                 alert(res.data);
             })
-    }, [])
+    }
 
     function NewComment() {
         setLoading(true)
@@ -35,6 +39,7 @@ export default function CatComments(props) {
             .then(() => {
                 navigate(`/cats/${props.id}`);
                 setLoading(false)
+                ReloadComments()
             })
             .catch((res) => {
                 setLoading(false)
