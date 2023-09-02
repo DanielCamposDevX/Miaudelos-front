@@ -6,7 +6,7 @@ import { useState, useRef } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
 import VideoLoad from '../assets/pinterest-video9.mp4'
-
+import VideoLoad from '../assets/pinterest-video63.mp4'
 
 export default function Login() {
 
@@ -51,7 +51,7 @@ export default function Login() {
 
             <Page>
                 <Fade>
-                    <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99', overflow: 'hidden',position:'relative', zIndex:'10'}}>
+                  {!loading && <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99', overflow: 'hidden',position:'relative', zIndex:'10'}}>
                         <CusImg src={Name} />
                         <Search variant="filled" type='email' label='Email' color='secondary' required value={email} onChange={(e) => setEmail(e.target.value)} />
                         <Search variant="filled" type='password' label='Senha' color='secondary' required value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -69,7 +69,14 @@ export default function Login() {
                             className={videoFadeOut ? 'fade-out' : ''}
                         />}
                         
-                    </Container>
+                    </Container>}
+                    {loading && <video
+                            src={VideoLoad2}
+                            autoPlay
+                            muted
+                            loop
+                            style={{ width: '100%',position:'absolute', top: '0px', left:'0px',zIndex:'1000'}}
+                        />}
                 </Fade>
             </Page>
 
