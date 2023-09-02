@@ -6,7 +6,7 @@ import { useState, useRef } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
 import VideoLoad from '../assets/pinterest-video9.mp4'
-import VideoLoad from '../assets/pinterest-video63.mp4'
+import VideoLoad2 from '../assets/pinterest-video63.mp4'
 
 export default function Login() {
 
