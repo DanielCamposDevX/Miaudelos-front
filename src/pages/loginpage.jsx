@@ -16,11 +16,11 @@ export default function Login() {
     const videoRef = useRef(null);
     const [videoFadeOut, setVideoFadeOut] = useState(false);
     const navigate = useNavigate();
-    const [exist,setExist] = useState(true)
+    const [exist, setExist] = useState(true)
 
 
     const handleVideoEnd = () => {
-        setVideoFadeOut(true); 
+        setVideoFadeOut(true);
         setTimeout(() => {
             setExist(false); // Define entrance como true após a animação de fade-out
         }, 1000);
@@ -51,32 +51,34 @@ export default function Login() {
 
             <Page>
                 <Fade>
-                  {!loading && <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99', overflow: 'hidden',position:'relative', zIndex:'10'}}>
-                        <CusImg src={Name} />
-                        <Search variant="filled" type='email' label='Email' color='secondary' required value={email} onChange={(e) => setEmail(e.target.value)} />
-                        <Search variant="filled" type='password' label='Senha' color='secondary' required value={password} onChange={(e) => setPassword(e.target.value)} />
-                        <Container style={{ background: 'transparent', height: 'auto', border: 'none' }}>
-                            <Sbutton variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none', backgroundColor: 'purple' }} type='submit'>Entrar</Sbutton>
-                            <Sbutton variant="contained" style={{ backgroundColor: 'orange', fontWeight: '700', marginTop: '20px', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
-                        </Container>
-                        {exist &&<video
-                            ref={videoRef}
-                            src={VideoLoad}
-                            autoPlay
-                            muted
-                            onEnded={handleVideoEnd} 
-                            style={{ width: '100%',position:'absolute', top: '-100px', left:'0px',zIndex:'1000'}}
-                            className={videoFadeOut ? 'fade-out' : ''}
-                        />}
-                        
-                    </Container>}
-                    {loading && <video
+                    <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99', overflow: 'hidden', position: 'relative', zIndex: '10' }}>
+                        {!loading && <>
+                            <CusImg src={Name} />
+                            <Search variant="filled" type='email' label='Email' color='secondary' required value={email} onChange={(e) => setEmail(e.target.value)} />
+                            <Search variant="filled" type='password' label='Senha' color='secondary' required value={password} onChange={(e) => setPassword(e.target.value)} />
+                            <Container style={{ background: 'transparent', height: 'auto', border: 'none' }}>
+                                <Sbutton variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none', backgroundColor: 'purple' }} type='submit'>Entrar</Sbutton>
+                                <Sbutton variant="contained" style={{ backgroundColor: 'orange', fontWeight: '700', marginTop: '20px', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
+                            </Container>
+                            {exist && <video
+                                ref={videoRef}
+                                src={VideoLoad}
+                                autoPlay
+                                muted
+                                onClick={handleVideoEnd}
+                                onEnded={handleVideoEnd}
+                                style={{ width: '100%', position: 'absolute', top: '-100px', left: '0px', zIndex: '1000' }}
+                                className={videoFadeOut ? 'fade-out' : ''}
+                            />}</>}
+                        {loading && <video
                             src={VideoLoad2}
                             autoPlay
                             muted
                             loop
-                            style={{ width: '100%',position:'absolute', top: '0px', left:'0px',zIndex:'1000'}}
-                        />}
+                            style={{ width: '100%', position: 'absolute', top: '-30px', left: '0px', zIndex: '1000' }}
+                        />} 
+                    </Container>
+
                 </Fade>
             </Page>
 
