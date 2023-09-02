@@ -65,7 +65,7 @@ export default function Login() {
                             autoPlay
                             muted
                             onEnded={handleVideoEnd} 
-                            style={{ width: '100%',position:'absolute', top: '-30%', left:'0px',zIndex:'1000'}}
+                            style={{ width: '100%',position:'absolute', top: '-100px', left:'0px',zIndex:'1000'}}
                             className={videoFadeOut ? 'fade-out' : ''}
                         />}
                         
