@@ -2,10 +2,10 @@ import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
 import Name from '../assets/LogoName.png'
 import axios from 'axios'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { LoadingButton } from '@mui/lab';
 import { TextField } from '@mui/material';
-
+import VideoLoad from '../assets/pinterest-video9.mp4'
 
 
 export default function Login() {
@@ -13,8 +13,18 @@ export default function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const videoRef = useRef(null);
+    const [videoFadeOut, setVideoFadeOut] = useState(false);
     const navigate = useNavigate();
+    const [exist,setExist] = useState(true)
+
+
+    const handleVideoEnd = () => {
+        setVideoFadeOut(true); 
+        setTimeout(() => {
+            setExist(false); // Define entrance como true após a animação de fade-out
+        }, 1000);
+    };
 
     function handleSubmit(event) {
         setLoading(true);
@@ -22,8 +32,8 @@ export default function Login() {
         const promise = axios.post(`${import.meta.env.VITE_URL}/login`, { email, password })
             .then((res) => {
                 localStorage.setItem('token', res.data.token);
-                localStorage.setItem('user',res.data.name);
-                localStorage.setItem('id',res.data.userid);
+                localStorage.setItem('user', res.data.name);
+                localStorage.setItem('id', res.data.userid);
                 setLoading(false);
                 navigate('/home')
             })
@@ -38,10 +48,10 @@ export default function Login() {
 
     return (
         <form onSubmit={handleSubmit} style={{ width: '100%', height: '100vh' }}>
+
             <Page>
                 <Fade>
-                    <Container style={{boxShadow: '0px 4px 24px 0px #1e1c1f99'}}>
-
+                    <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99', overflow: 'hidden',position:'relative', zIndex:'10'}}>
                         <CusImg src={Name} />
                         <Search variant="filled" type='email' label='Email' color='secondary' required value={email} onChange={(e) => setEmail(e.target.value)} />
                         <Search variant="filled" type='password' label='Senha' color='secondary' required value={password} onChange={(e) => setPassword(e.target.value)} />
@@ -49,10 +59,20 @@ export default function Login() {
                             <Sbutton variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none', backgroundColor: 'purple' }} type='submit'>Entrar</Sbutton>
                             <Sbutton variant="contained" style={{ backgroundColor: 'orange', fontWeight: '700', marginTop: '20px', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
                         </Container>
-
+                        {exist &&<video
+                            ref={videoRef}
+                            src={VideoLoad}
+                            autoPlay
+                            muted
+                            onEnded={handleVideoEnd} 
+                            style={{ width: '100%',position:'absolute', top: '-30%', left:'0px',zIndex:'1000'}}
+                            className={videoFadeOut ? 'fade-out' : ''}
+                        />}
+                        
                     </Container>
                 </Fade>
             </Page>
+
         </form>
     );
 }
@@ -76,7 +96,7 @@ const CusImg = styled.img`
     max-width: 300px;
     height: auto;
     border: 1px solid black;
-    background-color: #ffffffdf;
+    background-color: #fdfbd5;
     border-radius: 15px;
 
 `

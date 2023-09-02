@@ -10,7 +10,7 @@ import CatBreeds from '../components/catBreeds';
 import axios from 'axios';
 import UserContainer from '../components/userContainer';
 import SearchCat from '../components/searchCat';
-
+import videoLoad from '../assets/pinterest-video63.mp4'
 
 
 export default function Home() {
@@ -50,7 +50,7 @@ export default function Home() {
             <Header>
                 <IconButton sx={{ color: 'purple' }} onClick={() => { setUser(true) }}><AccountCircleIcon sx={{ fontSize: '30px' }} /></IconButton>
                 <CusImg src={Logo} />
-                <IconButton onClick={()=>{setSearch(!search)}} sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
+                <IconButton onClick={() => { setSearch(!search) }} sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
             </Header>
             {search && <SearchCat catData={catData} setCatData={setCatData} allCats={allCats} />}
             {user &&
@@ -61,14 +61,14 @@ export default function Home() {
             <Breeds>
                 <CatBreeds setCatData={setCatData} setLoading={setLoading} loading={loading} />
             </Breeds>
-            <Container>
+            <Container style={{ overflow: 'hidden' }}>
                 {
                     !loading &&
                     <CatBoxes catData={catData} />
                 }
                 {
                     loading &&
-                    <CircularProgress size={80} color="inherit" />
+                    <video src={videoLoad} autoPlay muted loop style={{ height: '70vh', width: 'auto' }} />
                 }
             </Container>
         </Page>
