@@ -15,18 +15,10 @@ export default function LoadingPage(props){
 
 
 const Page = styled.div`
-    z-index: 1000;
-    width: 100%;
+    z-index: 200;
+    min-width: 100%;
     height: 70vh;
     background-color: #B5E1DF
-    h1{
-        font-size: 25px;
-        position: fixed;
-        bottom: 10%;
-        left: 0px;
-        width: 100%;
-        text-align: center;
-    }
 `
 const CusVideo = styled.video`
     width: 100%;

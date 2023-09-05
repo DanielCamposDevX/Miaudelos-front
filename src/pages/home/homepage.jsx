@@ -38,7 +38,10 @@ export default function Home() {
         promise.then((res) => {
             setCatData(res.data);
             setAllCats(res.data);
-            setLoading(false);
+            setTimeout(()=>{
+                setLoading(false);
+            },3000)
+            
         })
         promise.catch((err) => { alert(err) });
     }, [])
@@ -50,7 +53,7 @@ export default function Home() {
             {search && <SearchCat catData={catData} setCatData={setCatData} allCats={allCats} />}
             {user &&
                 <Box onClick={() => { setUser(false) }}>
-                    <UserContainer name={name} />
+                    <UserContainer name={name} user={user} />
                 </Box>
             }
             <Breeds>
@@ -98,7 +101,7 @@ const Container = styled.div`
     border-radius: 12px;
     border: 1px solid black;
     @media (min-width: 660px) {
-        padding-left: 30px;
+        padding-left: ${(props) => (props.loading ? '' : '30px')};
     }
     @media (min-width: 1400px) {
         margin-top: 30px;

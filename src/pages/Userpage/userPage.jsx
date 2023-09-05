@@ -7,6 +7,7 @@ import Logo from '../assets/Logo.png'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CatBoxes from "./components/catBoxes";
+import PageSecondHeader from "../../header/SecondHeader";
 
 export default function UserPage() {
 
@@ -28,11 +29,7 @@ export default function UserPage() {
 
     return (
         <Page>
-            <Header>
-                <IconButton onClick={() => { navigate('/home') }} sx={{ color: 'purple' }} ><ArrowBackIcon sx={{ fontSize: '30px' }} /></IconButton>
-                <CusImg src={Logo} />
-                <IconButton sx={{ color: 'white' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
-            </Header>
+            <PageSecondHeader />
             <Container>
                 {!load &&
                     <>
@@ -63,26 +60,6 @@ const Page = styled.div`
     background-image: url('https://i.pinimg.com/564x/51/48/9d/51489d4a8d7bd9eefd33d9056a767455.jpg');
 `
 
-const Header = styled.div`
-font-family: 'Lexend Deca', sans-serif;
-position: fixed;
-top:0px;
-left:0px;
-z-index: 1000;
-height: 10vh;
-width: 92%;
-padding-left:4%;
-padding-right:4%;
-background-color: white;
-display:flex;
-justify-content:space-between;
-align-items:center;
-border-bottom: 1px solid gray;
-`
-
-const CusImg = styled.img`
-    height: 14vh;
-`
 
 const Container = styled.div`
     margin-top: 14vh;

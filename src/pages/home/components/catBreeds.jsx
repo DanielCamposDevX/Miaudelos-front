@@ -33,12 +33,12 @@ export default function CatBreeds(props) {
             const promise = axios.get(`${import.meta.env.VITE_URL}/cats`, config)
             promise.then((res) => { 
             props.setCatData(res.data); 
-            props.setLoading(false); })
+            setTimeout(() => {props.setLoading(false)},2000)})
             promise.catch((err) => { alert(err) });
             return 0
         }
         const promise = axios.get(`${import.meta.env.VITE_URL}/breed/${id}`, config);
-        promise.then((res) => { props.setCatData(res.data); props.setLoading(false)})
+        promise.then((res) => { props.setCatData(res.data); setTimeout(() => {props.setLoading(false)},2000)})
         promise.catch((res) => { alert(res) })
     }
 

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import CatComments from "./components/catComments";
+import CatComments from "../components/catComments";
+import PageSecondHeader from "../../header/SecondHeader";
 
 export default function Catscreen() {
 
@@ -29,6 +30,7 @@ export default function Catscreen() {
 
     return (
         <Page>
+            <PageSecondHeader />
             <Container>
                 {data &&
                     <>
@@ -87,6 +89,7 @@ const Page = styled.div`
 `;
 
 const Container = styled.div`
+    margin-top: 20vh;
     flex-direction: column;
     display:flex;
     width: 80%;

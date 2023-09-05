@@ -1,21 +1,19 @@
 import { IconButton } from '@mui/material';
 import styled from 'styled-components';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
+import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import SearchIcon from '@mui/icons-material/Search';
 import Logo from '../pages/assets/Logo.png'
+import { useNavigate } from 'react-router-dom';
 
 
-export default function PageHeader(props) {
+export default function PageSecondHeader(props) {
+    const navigate = useNavigate();
+    
     return (
         <Header>
-            <IconButton sx={{ color: 'purple' }} onClick={() => { props.setUser(true) }}>
-                <AccountCircleIcon sx={{ fontSize: '30px' }} />
-            </IconButton>
+            <IconButton onClick={() => { navigate(-1) }} sx={{ color: 'purple' }} ><ArrowBackIcon sx={{ fontSize: '30px' }} /></IconButton>
             <CusImg src={Logo} />
-            <IconButton
-                onClick={() => { props.setSearch(!props.search); window.scrollTo({ top: 0, behavior: 'smooth' }); }} sx={{ color: 'purple' }}>
-                <SearchIcon sx={{ fontSize: '30px' }} />
-            </IconButton>
+            <IconButton sx={{ color: 'white' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
         </Header>
     )
 }
@@ -26,7 +24,7 @@ const Header = styled.div`
     position: fixed;
     top:0px;
     left:0px;
-    z-index: 1000;
+    z-index: 2000;
     height: 10vh;
     width: 92%;
     padding-left:4%;

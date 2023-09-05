@@ -3,16 +3,22 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios'
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
-import { TextField, IconButton } from '@mui/material';
-import SearchIcon from '@mui/icons-material/Search';
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Logo from './assets/Logo.png'
-import FormBreeds from './components/formBreeds';
+import { TextField } from '@mui/material';
+import FormBreeds from '../components/formBreeds';
+import PageSecondHeader from '../../header/SecondHeader';
+import AddCatInputs from './components/inputs';
 
 
 
 export default function NewCatPage() {
 
+    const [cat,setCat] = useState({
+        name: '',
+        image: '',
+        breedid: '',
+        color: '',
+        description: ''
+    })
     const [name, setName] = useState('');
     const [image, setImage] = useState('');
     const [breedid, setBreedId] = useState('');
@@ -57,23 +63,15 @@ export default function NewCatPage() {
     return (
 
         <form onSubmit={handleSubmit} style={{ width: '100%', height: '100vh' }}>
-            <Header>
-                <IconButton onClick={() => { navigate('/home') }} sx={{ color: 'purple' }} ><ArrowBackIcon sx={{ fontSize: '30px' }} /></IconButton>
-                <CusImg src={Logo} />
-                <IconButton sx={{ color: 'white' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
-            </Header>
+            <PageSecondHeader />
             <Page>
                 <Fade>
                     <Container style={{ boxShadow: '0px 4px 24px 0px #1e1c1f99' }}>
-                        <Search variant="filled" type='text' label='Name' color='secondary' required value={name} onChange={(e) => setName(e.target.value)} />
-                        <Search variant="filled" type='url' label='Imagem' color='secondary' required value={image} onChange={(e) => setImage(e.target.value)} />
-                        <Search variant="filled" type='text' label='Cor' color='secondary' required value={color} onChange={(e) => setColor(e.target.value)} />
-                        <Search variant="filled" type='text' label='Descrição' color='secondary' required value={description} onChange={(e) => setDescription(e.target.value)} />
+                        <AddCatInputs cat={cat} setCat={setCat}/>
                         <FormBreeds breedid={breedid} setBreedId={setBreedId} />
                         <Container style={{ background: 'transparent', height: 'auto', border: 'none' }}>
                             <Sbutton variant="contained" loading={loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none', backgroundColor: 'purple' }} type='submit'>Adicionar Gato</Sbutton>
                         </Container>
-
                     </Container>
                 </Fade>
             </Page>
@@ -91,19 +89,6 @@ const Page = styled.div`
     font-family: 'Lexend Deca', sans-serif;
     background-image: url('https://i.pinimg.com/564x/51/48/9d/51489d4a8d7bd9eefd33d9056a767455.jpg');
     `
-
-const CusImg = styled.img`
-    height: 14vh;
-`
-
-const Search = styled(TextField)({
-    backgroundColor: '#ffffff',
-    fontFamily: 'inherit',
-    width: '80%',
-    height: 'auto',
-    maxWidth: '300px',
-    zIndex: '20'
-})
 
 const Sbutton = styled(LoadingButton)({
     fontWeight: '700',
@@ -138,21 +123,4 @@ const Fade = styled.div`
     justify-content:space-around;
     font-family: 'Lexend Deca', sans-serif;
     z-index: 1000;
-`
-
-const Header = styled.div`
-    font-family: 'Lexend Deca', sans-serif;
-    position: fixed;
-    top:0px;
-    left:0px;
-    z-index: 1001;
-    height: 10vh;
-    width: 92%;
-    padding-left:4%;
-    padding-right:4%;
-    background-color: white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom: 1px solid gray;
 `

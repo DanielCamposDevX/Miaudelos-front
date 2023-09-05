@@ -1,25 +1,25 @@
 import styled from "styled-components"
 import { TextField } from "@mui/material"
-import { useState } from "react"
-import { useEffect } from "react"
+import { useState, useEffect } from "react"
 
-export default function SearchCat(props){
 
-    const [search,SetSearch] = useState('')
+export default function SearchCat(props) {
 
-    
-    useEffect(()=>{
-        if(search === ''){
+    const [search, SetSearch] = useState('');
+
+
+    useEffect(() => {
+        if (search === '') {
             props.setCatData(props.allCats);
         }
-        else{
+        else {
             const data = props.catData
             const filteredObjects = data.filter(obj => obj.name.toLowerCase().startsWith(search.toLowerCase()));
             props.setCatData(filteredObjects)
         }
-    },[search])
+    }, [search])
 
-    return(
+    return (
         <Search variant="filled" type='text' label='Search' color='secondary' required value={search} onChange={(e) => SetSearch(e.target.value)} />
     )
 }
