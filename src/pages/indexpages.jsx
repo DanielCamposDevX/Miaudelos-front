@@ -1,4 +1,4 @@
-import Home from "./homepage";
+import Home from "./home/homepage";
 import Login from "./loginpage/loginpage";
 import Cadastro from "./signuppage/cadastropage";
 import Catscreen from "./catScreen";
