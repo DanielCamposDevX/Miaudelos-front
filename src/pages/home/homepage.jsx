@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logo from './assets/Logo.png'
+import Logo from '../assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
