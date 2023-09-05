@@ -1,15 +1,14 @@
 import styled from 'styled-components';
-import Logo from '../assets/Logo.png'
-import CatBoxes from "../components/catBoxes";
+import axios from 'axios';
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { TextField, IconButton, Button, CircularProgress, ButtonGroup } from '@mui/material';
-import AccountCircleIcon from '@mui/icons-material/AccountCircle';
-import SearchIcon from '@mui/icons-material/Search';
-import CatBreeds from '../components/catBreeds';
-import axios from 'axios';
-import UserContainer from '../components/userContainer';
-import SearchCat from '../components/searchCat';
+
+import CatBoxes from "./components/catBoxes";
+import CatBreeds from './components/catBreeds';
+import UserContainer from './components/userContainer';
+import SearchCat from './components/searchCat';
+import PageHeader from '../../header/Header';
+import LoadingPage from './components/loadingpage/loadingPage';
 
 
 
@@ -47,11 +46,7 @@ export default function Home() {
 
     return (
         <Page>
-            <Header>
-                <IconButton sx={{ color: 'purple' }} onClick={() => { setUser(true) }}><AccountCircleIcon sx={{ fontSize: '30px' }} /></IconButton>
-                <CusImg src={Logo} />
-                <IconButton onClick={() => { setSearch(!search) }} sx={{ color: 'purple' }}><SearchIcon sx={{ fontSize: '30px' }} /></IconButton>
-            </Header>
+            <PageHeader setSearch={setSearch} search={search} setUser={setUser} />
             {search && <SearchCat catData={catData} setCatData={setCatData} allCats={allCats} />}
             {user &&
                 <Box onClick={() => { setUser(false) }}>
@@ -61,14 +56,12 @@ export default function Home() {
             <Breeds>
                 <CatBreeds setCatData={setCatData} setLoading={setLoading} loading={loading} />
             </Breeds>
-            <Container style={{ overflow: 'hidden' }}>
+            <Container loading={loading} style={{ overflow: 'hidden' }}>
                 {
-                    !loading &&
-                    <CatBoxes catData={catData} />
-                }
-                {
-                    loading &&
-                    <h1>Carregando</h1>
+                    !loading ?
+                        <CatBoxes catData={catData} />
+                        :
+                        <LoadingPage />
                 }
             </Container>
         </Page>
@@ -90,25 +83,7 @@ const Page = styled.div`
     
 `;
 
-const Header = styled.div`
-    font-family: 'Lexend Deca', sans-serif;
-    position: fixed;
-    top:0px;
-    left:0px;
-    z-index: 1000;
-    height: 10vh;
-    width: 92%;
-    padding-left:4%;
-    padding-right:4%;
-    background-color: white;
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    border-bottom: 1px solid gray;
-`
-const CusImg = styled.img`
-    height: 14vh;
-`
+
 
 const Container = styled.div`
     flex-wrap: wrap;
@@ -116,7 +91,7 @@ const Container = styled.div`
     max-width: 1000px;
     min-height: 70vh;
     display:flex;  
-    padding-top: 30px;
+    padding-top: ${(props) => (props.loading ? '' : '30px')} ;
     align-items: center;
     justify-content: center;
     background-image: url('https://i.pinimg.com/564x/5d/1a/8c/5d1a8c25ed26554708c3f633509e4c91.jpg');

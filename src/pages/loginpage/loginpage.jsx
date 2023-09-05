@@ -30,7 +30,7 @@ export default function Login() {
                 setTimeout(() => {
                     setLoading(false);
                     navigate('/home');
-                }, 2000)
+                }, 3000)
 
             })
             .catch((error) => {

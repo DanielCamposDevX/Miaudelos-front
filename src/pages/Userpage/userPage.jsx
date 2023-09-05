@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom"
 import { IconButton, CircularProgress } from "@mui/material"
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Logo from './assets/Logo.png'
+import Logo from '../assets/Logo.png'
 import { useEffect, useState } from "react";
 import axios from "axios";
 import CatBoxes from "./components/catBoxes";
