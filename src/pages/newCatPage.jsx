@@ -1,14 +1,13 @@
 import styled from 'styled-components';
 import { useNavigate } from 'react-router-dom';
-import Name from '../assets/LogoName.png'
 import axios from 'axios'
 import { useState } from 'react';
 import { LoadingButton } from '@mui/lab';
-import { TextField, IconButton, Select, MenuItem } from '@mui/material';
+import { TextField, IconButton } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Logo from '../assets/Logo.png'
-import FormBreeds from '../components/formBreeds';
+import Logo from './assets/Logo.png'
+import FormBreeds from './components/formBreeds';
 
 
 

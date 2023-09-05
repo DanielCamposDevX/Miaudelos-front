@@ -1,9 +1,7 @@
-import { useState } from 'react'
 import { Login, Home,Cadastro, Catscreen, NewCatPage, UserPage, EditUser } from './pages/indexpages'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <BrowserRouter>

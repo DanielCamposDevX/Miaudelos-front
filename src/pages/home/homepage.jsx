@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import Logo from '../assets/Logo.png'
+import Logo from './assets/Logo.png'
 import CatBoxes from "../components/catBoxes";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,7 +10,7 @@ import CatBreeds from '../components/catBreeds';
 import axios from 'axios';
 import UserContainer from '../components/userContainer';
 import SearchCat from '../components/searchCat';
-import videoLoad from '../assets/pinterest-video63.mp4'
+
 
 
 export default function Home() {
@@ -68,7 +68,7 @@ export default function Home() {
                 }
                 {
                     loading &&
-                    <video src={videoLoad} autoPlay muted loop style={{ height: '70vh', width: 'auto' }} />
+                    <h1>Carregando</h1>
                 }
             </Container>
         </Page>

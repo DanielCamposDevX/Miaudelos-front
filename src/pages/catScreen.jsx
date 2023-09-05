@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import CatComments from "../components/catComments";
+import CatComments from "./components/catComments";
 
 export default function Catscreen() {
 

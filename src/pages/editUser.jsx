@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import SearchIcon from '@mui/icons-material/Search';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import Logo from '../assets/Logo.png'
+import Logo from './assets/Logo.png'
 import { LoadingButton } from "@mui/lab";
 import { IconButton, TextField } from "@mui/material";
 import axios from "axios";
