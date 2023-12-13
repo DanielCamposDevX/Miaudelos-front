@@ -47,13 +47,10 @@ export default function NewCatPage() {
         }
         const promise = axios.post(`${import.meta.env.VITE_URL}/cats`, data, config)
         promise.then((res) => {
-            console.log(config);
-            console.log(res);
             setLoading(false);
             navigate('/home');
         });
         promise.catch((res) => {
-            console.log(promise);
             alert(res);
             setLoading(false);
         });

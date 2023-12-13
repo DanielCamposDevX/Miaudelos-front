@@ -48,15 +48,11 @@ export default function EditUser() {
             phone,
             name
         }
-        console.log(data)
-        console.log(config)
         const promise = axios.patch(`${import.meta.env.VITE_URL}/users/edit/${id}`, data, config)
         promise.then((res) => {
-            console.log(res);
             navigate('/home');
         });
         promise.catch((res) => {
-            console.log(res);
             alert(res);
         });
     }
