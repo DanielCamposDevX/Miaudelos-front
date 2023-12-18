@@ -2,6 +2,10 @@
 
 Site criado para achar facilmente modelos pets, seja para seu filme ou ensaio fotográfico. A página mostra os gatos de forma divertida e interativa, com o intuito de ter um site com a abordagem mais descontraída e leve.
 
+# DEPLOY
+
+
+
 
 # Como Rodar
 
