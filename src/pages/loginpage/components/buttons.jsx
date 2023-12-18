@@ -8,7 +8,7 @@ export default function LoginButtons(props) {
     return (
         <Container>
             <Sbutton variant="contained" loading={props.loading} style={{ fontWeight: '700', fontFamily: 'Lexend Deca', textTransform: 'none', backgroundColor: 'purple' }} type='submit'>Entrar</Sbutton>
-            <Sbutton variant="contained" style={{ backgroundColor: 'orange', fontWeight: '700', marginTop: '20px', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/cadastro') }}>Cadastre-se</Sbutton>
+            <Sbutton variant="contained" style={{ backgroundColor: 'orange', fontWeight: '700', marginTop: '20px', fontFamily: 'Lexend Deca', textTransform: 'none' }} onClick={() => { navigate('/signup') }}>Cadastre-se</Sbutton>
         </Container>
     )
 }

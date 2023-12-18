@@ -8,7 +8,7 @@ import LogoName from '../assets/LogoName.png'
 import LoadingPage from './components/loadingpage/loadingPage';
 
 
-export default function Cadastro() {
+export default function Signup() {
 
     const navigate = useNavigate();
     const [created,setCreated] = useState(false);
