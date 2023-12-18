@@ -1,4 +1,4 @@
-import { Login, Home, Signup, Catscreen, NewCatPage, UserPage, EditUser, Signup } from './pages/indexpages'
+import { Login, Home, Signup, Catscreen, NewCatPage, UserPage, EditUser } from './pages/indexpages'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 function App() {
