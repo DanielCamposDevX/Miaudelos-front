@@ -6,7 +6,7 @@ import Logo from '../pages/assets/Logo.png'
 import { useNavigate } from 'react-router-dom';
 
 
-export default function PageSecondHeader(props) {
+export default function PageSecondHeader() {
     const navigate = useNavigate();
     
     return (

@@ -23,7 +23,7 @@ export default function CatComments(props) {
     }, [])
 
     function ReloadComments(){
-         const promise = axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
+         axios.get(`${import.meta.env.VITE_URL}/${props.id}/comments`)
             .then((res) => {
                 setComments(res.data)
             })
@@ -35,7 +35,7 @@ export default function CatComments(props) {
     function NewComment() {
         setLoading(true)
         const userid = localStorage.getItem('id')
-        const promise = axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, { userid, comment: text, rate })
+        axios.post(`${import.meta.env.VITE_URL}/${props.id}/comments/new`, { userid, comment: text, rate })
             .then(() => {
                 navigate(`/cats/${props.id}`);
                 setText('');
